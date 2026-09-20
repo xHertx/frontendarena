@@ -1,0 +1,143 @@
+/* The main horizontal scroll container */
+.horizontal-scroll-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  z-index: 1;
+  position: relative;
+  /* Hide scrollbar */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Spacer for first and last items to ensure they can be centered */
+.scroll-spacer {
+  flex: 0 0 50vw;
+  height: 100%;
+}
+
+/* Individual Card Wrapper for snap and sizing */
+.card-snap-wrapper {
+  flex: 0 0 auto;
+  width: 60vw;
+  height: 70vh;
+  margin: 0 5vw;
+  scroll-snap-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+.receipt-card, .insight-card {
+  width: 100%;
+  height: 100%;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: scale(0.8) translateZ(-100px);
+  opacity: 0.3;
+}
+
+/* Active card is massive and fully opaque */
+.card-snap-wrapper.active .receipt-card,
+.card-snap-wrapper.active .insight-card {
+  transform: scale(1) translateZ(0);
+  opacity: 1;
+}
+
+.card-snap-wrapper.active .receipt-card {
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8), 0 0 40px var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  font-family: 'Space Mono', monospace;
+}
+
+.card-icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #fff;
+}
+
+.card-body {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.card-title {
+  font-size: 5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.card-subtitle {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  color: var(--text-secondary);
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 1.2rem;
+}
+
+.card-amount {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Floating HUD */
+.hud {
+  position: fixed;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  font-family: 'Space Mono', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 0.8rem;
+  color: #fff;
+  opacity: 0.5;
+  display: flex;
+  gap: 2rem;
+  pointer-events: none;
+}
+
+@media (max-width: 1024px) {
+  .card-snap-wrapper {
+    width: 80vw;
+  }
+  .card-title { font-size: 3rem; }
+  .card-subtitle { font-size: 1.5rem; }
+}

@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Playfair+Display:ital,wght@1,600&family=Space+Mono&display=swap');
+
+:root {
+  --bg-color: #050505;
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  
+  --accent-indigo: #4db8ff;
+  --accent-rose: #ff4d6d;
+  --accent-teal: #00f5d4;
+  
+  --glass-bg: rgba(10, 10, 15, 0.4);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow: hidden; /* We scroll inside a container, not the body */
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-color);
+  transition: background-color 1s ease-in-out;
+}
+
+/* Add a massive subtle vignette/glow overlay so the solid color isn't flat */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255,255,255,0.05);
+  border-radius: 24px;
+}
